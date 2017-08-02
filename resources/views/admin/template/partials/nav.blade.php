@@ -15,22 +15,22 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
     
-        <li>{!! link_to('/', $title = 'Inicio', $attributes = ['class'=>'active']) !!}</li>       
-        <li>{!! link_to('admin/users', $title = 'Usuarios') !!}</li>
-        <li>{!! link_to('/categories', $title = 'Categorias') !!}</li>
-        <li>{!! link_to('images',$title = 'Imagenes') !!}</li>
-        <li>{!! link_to('tags', $title = 'Tags') !!}</li>       
+        <li>{!! link_to('/', $title = ' Inicio ', $attributes = ['class'=>'active glyphicon glyphicon-home',]) !!}</li>       
+        <li>{!! link_to('admin/users', $title = ' Usuarios', $attributes = ['class'=>'glyphicon glyphicon-user']) !!}</li>
+        <li>{!! link_to('/categories', $title = ' Categorias', $attributes = ['class'=>'glyphicon glyphicon-list-alt']) !!}</li>
+        <li>{!! link_to('images',$title = ' Imagenes', $attributes = ['class'=>'glyphicon glyphicon-picture']) !!}</li>
+        <li>{!! link_to('tags', $title = ' Tags', $attributes = ['class'=>'glyphicon glyphicon-tags']) !!}</li>       
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Pagina Principal</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-home"></span> Pagina Principal</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opciones <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="glyphicon glyphicon-wrench"></span> Opciones <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Editar Cuenta</a></li>
+            <li><a href="#"> <span class="glyphicon glyphicon-edit"></span> Editar Cuenta</a></li>
                        
             <li class="divider"></li>
-            <li><a href="#">Cerrar Sesion</a></li>
+            <li><a href="#"> <span class="glyphicon glyphicon-off"></span> Cerrar Sesion</a></li>
           </ul>
         </li>
       </ul>
