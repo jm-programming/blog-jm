@@ -18,9 +18,12 @@ Route::get('/', function () {
 });
 
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('users', 'UserController');
-});
+Route::resource('users', 'UserController');
+
+Route::get('users/{id}/destroy', [
+    'as' => 'admin.users.destroy',
+    'uses' => 'UserController@destroy'
+]);
 
 Route::resource('images', 'ImageController');
 Route::resource('tags', 'TagController');

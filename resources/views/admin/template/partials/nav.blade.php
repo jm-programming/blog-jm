@@ -16,7 +16,7 @@
       <ul class="nav navbar-nav">
     
         <li>{!! link_to('/', $title = ' Inicio ', $attributes = ['class'=>'active glyphicon glyphicon-home',]) !!}</li>       
-        <li>{!! link_to('admin/users', $title = ' Usuarios', $attributes = ['class'=>'glyphicon glyphicon-user']) !!}</li>
+        <li>{!! link_to('/users', $title = ' Usuarios', $attributes = ['class'=>'glyphicon glyphicon-user']) !!}</li>
         <li>{!! link_to('/categories', $title = ' Categorias', $attributes = ['class'=>'glyphicon glyphicon-list-alt']) !!}</li>
         <li>{!! link_to('images',$title = ' Imagenes', $attributes = ['class'=>'glyphicon glyphicon-picture']) !!}</li>
         <li>{!! link_to('tags', $title = ' Tags', $attributes = ['class'=>'glyphicon glyphicon-tags']) !!}</li>       

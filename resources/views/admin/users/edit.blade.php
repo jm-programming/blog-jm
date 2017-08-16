@@ -1,6 +1,6 @@
 @extends('admin.template.main')
 
-@section('title','Crear Usuario')
+@section('title','Editar Usuario')
 
 @section('content')
 <br>
@@ -13,35 +13,31 @@
 	
 	<div class="row">
     <div class="container text-aling">
-  <div class="panel panel-info">
+            <div class="panel panel-info">
   <div class="panel-heading">Usuario</div>
   <div class="panel-body">
-@include('alerts._dangers')
-  <h1>Crear nuevo Usuario</h1>
+  @include('alerts._dangers')
+  <h1>Editar Usuario {{$user->name}}</h1>
   <hr>
-    {!! Form::open(['route'=>'users.store', 'method'=>'POST']) !!}
+    {!! Form::open(['route'=>['users.update', $user->id], 'method'=>'PUT']) !!}
+    	
 
 		<div class="form-group">
 				{{ Form::label('name', 'Nombre') }}
-				{{ Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'Ingresa tu nombre']) }}
+				{{ Form::text('name', $user->name , ['class'=>'form-control', 'placeholder'=>'Ingresa tu nombre']) }}
 		</div>
 		<div class="form-group">
 				{{ Form::label('email', 'Correo') }}
-				{{ Form::email('email', null,['class'=>'form-control', 'placeholder'=>'Ingresa un correo electronico'])}}
-		</div>
-		<div class="form-group">
-				{{ Form::label('password', 'Contraseña') }}
-				{{ Form::password('password', ['class'=>'form-control', 'placeholder'=>'***********************']) }}
+				{{ Form::email('email',$user->email, ['class'=>'form-control', 'placeholder'=>'Ingresa un correo electronico'])}}
 		</div>
 		
-
 		<div class="form-group">
 				{{ Form::label('type', 'Tipo') }}
 				{{ Form::select('type',['member' => 'Miembro', 'admin' => 'Administrador'],null, ['class'=>'form-control']) }}
 		</div>
 	
 		<div class="form-group">
-			{{ Form::submit('Crear Usuario', ['class'=>'btn btn-primary ']) }}
+			{{ Form::submit('Editar Usuario', ['class'=>'btn btn-primary ']) }}
 		</div>
 	{!! Form::close() !!}
     <hr>
