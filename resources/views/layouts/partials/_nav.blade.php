@@ -22,13 +22,15 @@
                     
                     <ul class="nav navbar-nav">
     
-               
-        <li>{!! link_to('/users', $title = ' Usuarios', $attributes = ['class'=>'glyphicon glyphicon-user']) !!}</li>
+              			 @if (!Auth::guest())
+                           	 <li>{!! link_to('/users', $title = ' Usuarios', $attributes = ['class'=>'glyphicon glyphicon-user']) !!}</li>
         
-        <li>{!! link_to('/categories', $title = ' Categorias', $attributes = ['class'=>'glyphicon glyphicon-list-alt']) !!}</li>
-        <li>{!! link_to('images',$title = ' Imagenes', $attributes = ['class'=>'glyphicon glyphicon-picture']) !!}</li>
-        <li>{!! link_to('tags', $title = ' Tags', $attributes = ['class'=>'glyphicon glyphicon-tags']) !!}</li>       
-      </ul>
+        					<li>{!! link_to('/categories', $title = ' Categorias', $attributes = ['class'=>'glyphicon glyphicon-list-alt']) !!}</li>
+        					<li>{!! link_to('images',$title = ' Imagenes', $attributes = ['class'=>'glyphicon glyphicon-picture']) !!}</li>
+        					<li>{!! link_to('tags', $title = ' Tags', $attributes = ['class'=>'glyphicon glyphicon-tags']) !!}</li>       
+                    	 @endif
+       
+      				</ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         

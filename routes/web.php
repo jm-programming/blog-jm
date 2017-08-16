@@ -23,7 +23,14 @@ Route::get('users/{id}/destroy', [
 ]);
 
 Route::resource('images', 'ImageController');
+
 Route::resource('tags', 'TagController');
+Route::get('tags/{id}/destroy', [
+    'as' => 'admin.tags.destroy',
+    'uses' => 'TagController@destroy'
+]);
+
+
 Route::resource('categories', 'CategoryController');
 Route::get('categories/{id}/destroy', [
     'as' => 'admin.categories.destroy',

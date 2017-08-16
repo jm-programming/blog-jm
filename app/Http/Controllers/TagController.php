@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Tag;
+use Redirect;
+use Session;
+use Validator;
+
 
 class TagController extends Controller
 {
@@ -13,7 +18,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        dd('Hola desde Tags');
+        $tags = Tag::orderby('name')->paginate(5);
+        return view('admin.tags.index')->with(['tags' => $tags]);
     }
 
     /**
@@ -23,7 +29,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tags.create');
     }
 
     /**
@@ -34,7 +40,20 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:tags|max:150',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('tags/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $tag = new Tag($request->only('name'));
+        $tag->save();
+        Session::flash('message','Tag ' . $tag->name .  ' creado con exito...' );
+        return redirect()->route('tags.index');
     }
 
     /**
@@ -56,7 +75,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::find($id);
+        return view('admin.tags.edit')->with(['tag' => $tag]);
     }
 
     /**
@@ -68,7 +88,22 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:tags|max:150',
+            
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('tags.edit', $id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $tag = Tag::find($id);
+        $tag->fill($request->all());
+        $tag->save();
+        $request->session()->flash('message', 'Tag ' . $tag->name . ' editado con exito...');
+        return redirect()->route('tags.index');
     }
 
     /**
@@ -79,6 +114,9 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::find($id);
+        $tag->delete();
+        Session::flash('message', 'Tag ' . $tag->name . ' eliminado con exito...');
+        return redirect()->route('tags.index');
     }
 }
