@@ -32,3 +32,4 @@ Route::get('categories/{id}/destroy', [
     'as' => 'admin.categories.destroy',
     'uses' => 'CategoryController@destroy'
 ]);
+

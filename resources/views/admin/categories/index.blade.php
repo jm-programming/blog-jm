@@ -22,7 +22,7 @@
   
     <table class="table table-responsive">
 
-		<h1> <span class="glyphicon glyphicon-user"></span> Listado de categorias</h1>
+		<h1> <span class="glyphicon glyphicon-list-alt"></span> Listado de categorias</h1>
 		@include('alerts._success')
 		<div class="text-right">
 			{{ link_to_route('categories.create', $title = '',null, $attributes = ['class'=>'btn btn-info glyphicon glyphicon-plus']) }}<hr>
