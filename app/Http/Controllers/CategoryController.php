@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
+use Redirect;
+use Session;
+use Validator;
+
 
 class CategoryController extends Controller
 {
@@ -13,7 +18,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        dd('Hola desde Category');
+     	$categories = Category::orderBy('name','asc')->paginate(5);   
+    	return view('admin.categories.index', ['categories' => $categories]);
+
     }
 
     /**
@@ -23,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -34,7 +41,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    	$validator = Validator::make($request->all(), [
+            'name' => 'required|unique:categories|min:3|max:25',
+            
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('categories/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+    	$category = new Category($request->only('name'));
+        $category->save();
+        Session::flash('message',' Categoria ' . $category->name . ' creada con exito');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -56,7 +77,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+    	$categories = Category::find($id);
+        return view('admin.categories.edit', ['category' => $categories]);
     }
 
     /**
@@ -68,7 +90,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    	$validator = Validator::make($request->all(), [
+            'name' => 'required|unique:categories|min:3|max:25',
+            
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('categories.edit', $id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $category = Category::find($id);
+        $category->fill($request->all());
+        $category->save();
+        Session::flash('message', 'Categoria ' . $category->name . ' editada con exito...');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -79,6 +116,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        Session::flash('message','Categoria ' . $category->name . ' elimanada con exito...');
+        return redirect()->route('categories.index');
     }
 }

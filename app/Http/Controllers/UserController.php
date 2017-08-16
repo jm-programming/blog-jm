@@ -107,9 +107,7 @@ class UserController extends Controller
                         ->withInput();
         }
         $user = User::find($id);
-        $user->name = $request->name;
-        $user->type = $request->type;
-        $user->email = $request->email;
+        $user->fill($request->all());
         $user->save();
         session::flash('message', 'Usuario ' . $user->name . ' editado con exito');
         return redirect('/users');
