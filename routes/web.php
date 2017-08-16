@@ -33,3 +33,20 @@ Route::get('categories/{id}/destroy', [
     'uses' => 'CategoryController@destroy'
 ]);
 
+// Authentication routes...
+#Route::get('/login', 'Auth\LoginController@getLogin');
+Route::get('/login', [
+    'as' => '/login', 'uses' => 'Auth\LoginController@getLogin'
+]);
+
+Route::post('/login', [
+    'as' => 'auth.login', 'uses' => 'Auth\LoginController@postLogin'
+]);
+
+Route::get('/logout', [
+    'as' => '/logout', 'uses' => 'Auth\LoginController@getLogout'
+]);
+
+// Registration routes...
+#Route::get('auth/register', 'Auth\AuthController@getRegister');
+#Route::post('auth/register', 'Auth\AuthController@postRegister');
