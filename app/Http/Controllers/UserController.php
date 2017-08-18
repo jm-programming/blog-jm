@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Redirect;
 use Session;
-
+use DB;
 
 class UserController extends Controller
 {
@@ -18,6 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        
         $users = User::orderBy('type','asc')->paginate(5);
         return view('admin.users.index', ['users'=> $users]);
     }

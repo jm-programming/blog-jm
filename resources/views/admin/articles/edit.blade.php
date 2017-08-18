@@ -18,7 +18,7 @@
 	{{ csrf_field() }}
 		<div class="form-group">
 			{!! Form::label('title', 'Titulo') !!}
-			{!! Form::text('title', null, ['class'=>'form-control', 'placeholder'=>'Titulo del articulo']) !!}
+			{!! Form::text('title', $articles->title, ['class'=>'form-control', 'placeholder'=>'Titulo del articulo']) !!}
 		</div>
 		
 

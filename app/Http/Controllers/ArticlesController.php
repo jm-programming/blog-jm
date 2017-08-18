@@ -8,7 +8,7 @@ use App\Tag;
 use App\Image;
 use Session;
 use Redirect;
-
+use DB;
 
 
 class ArticlesController extends Controller
@@ -96,11 +96,15 @@ class ArticlesController extends Controller
     public function edit($id)
     {
         $articles = Article::find($id);
-        $categories = Category::all();
-        $tags = Tag::all();
+        $articles->category;
+
+        $categories = Category::orderBy('name', 'ASC')->get();
+        $tags = Tag::orderBy('name' , 'ASC')->get()/*->toArray()*/;
+        $my_tags = $articles->tags;
+                
         return view('admin.articles.edit')->with('articles', $articles)
                                           ->with('categories', $categories)
-                                          -with('tags', $tags);
+                                          ->with('tags', $tags);
     }
 
     /**
@@ -112,7 +116,13 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        
+        $articles = Article::find($id);
+        $articles->fill($request->all());
+        $articles->save();
+        Session::flash('message', 'Article ' . $articles->title . ' editado con exito...');
+        return redirect()->route('articles.index');
+
     }
 
     /**
