@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="panel panel-danger">
   <div class="panel-heading">
-    <h3 class="panel-title">Categorias</h3>
+    <h3 class="panel-title"><h3 class="text-center">Categorias</h3></h3>
   </div>
 
  

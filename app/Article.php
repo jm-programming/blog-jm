@@ -10,10 +10,9 @@ class Article extends Model
 
     protected $fillable = ['title','content', 'category_id', 'user_id'];
 
-
-    public function articles()
+    public function category()
     {
-        return $this->hasMany('App\Article');
+        return $this->belongsTo('App\Category');
     }
 
     public function user(){
@@ -27,5 +26,10 @@ class Article extends Model
     public function tags()
     {
         return $this->belongsToMany('App\Tag')->withTimestamps();;
+    }
+
+    public function scopeSearch($query , $title)
+    {
+        return $query->where('title', 'LIKE', "%$title%");
     }
 }

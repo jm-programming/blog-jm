@@ -10,8 +10,8 @@ class Category extends Model
 
     protected $fillable = ['name'];
 
-    public function Category()
+    public function articles()
     {
-    	return $this->belongsTo('App\Category');
+        return $this->hasMany('App\Article');
     }
 }

@@ -1,6 +1,6 @@
    <div id="app">
         <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -24,10 +24,10 @@
     
               			 @if (!Auth::guest())
                            	 <li>{!! link_to('/users', $title = ' Usuarios', $attributes = ['class'=>'glyphicon glyphicon-user']) !!}</li>
-        
         					<li>{!! link_to('/categories', $title = ' Categorias', $attributes = ['class'=>'glyphicon glyphicon-list-alt']) !!}</li>
+                            <li>{!! link_to('articles', $title = ' Articulos', $attributes = ['class'=>'glyphicon glyphicon-th-large']) !!}</li>       
         					<li>{!! link_to('images',$title = ' Imagenes', $attributes = ['class'=>'glyphicon glyphicon-picture']) !!}</li>
-        					<li>{!! link_to('tags', $title = ' Tags', $attributes = ['class'=>'glyphicon glyphicon-tags']) !!}</li>       
+        					<li>{!! link_to('tags', $title = ' Tags', $attributes = ['class'=>'glyphicon glyphicon-tags']) !!}</li>
                     	 @endif
        
       				</ul>

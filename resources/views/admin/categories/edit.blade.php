@@ -14,13 +14,13 @@
 	<div class="row">
     <div class="container text-aling">
             <div class="panel panel-info">
-  <div class="panel-heading">Categoria</div>
+  <div class="panel-heading"><h3 class="text-center">Categoria</h3></div>
   <div class="panel-body">
   @include('alerts._dangers')
   <h1>Editar Categoria {{$category->name}}</h1>
   <hr>
     {!! Form::open(['route'=>['categories.update', $category->id], 'method'=>'PUT']) !!}
-    	
+        {{ csrf_field() }}    	
 
 		<div class="form-group">
 				{{ Form::label('name', 'Nombre') }}
