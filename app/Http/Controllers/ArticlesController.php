@@ -36,8 +36,8 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $tags = Tag::all();
+        $categories = Category::orderBy('id', 'DESC')->pluck('name' , 'id');
+        $tags = Tag::orderBy('id', 'DESC')->pluck('name', 'id');
         return view('admin.articles.create')
                      ->with('categories', $categories)
                      ->with('tags', $tags);
@@ -95,16 +95,18 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
+        
+        
         $articles = Article::find($id);
         $articles->category;
-
-        $categories = Category::orderBy('name', 'ASC')->get();
-        $tags = Tag::orderBy('name' , 'ASC')->get()/*->toArray()*/;
-        $my_tags = $articles->tags;
+        $categories = Category::orderBy('name', 'ASC')->pluck('name','id');
+        $tags = Tag::orderBy('name' , 'ASC')->pluck('name','id');
+        $my_tags = $articles->tags->pluck('id')->toArray();
                 
         return view('admin.articles.edit')->with('articles', $articles)
                                           ->with('categories', $categories)
-                                          ->with('tags', $tags);
+                                          ->with('tags', $tags)
+                                          ->with('my_tags', $my_tags);
     }
 
     /**

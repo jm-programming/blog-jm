@@ -14,11 +14,13 @@
     {!! Html::style('plugins/bootstrap/css/bootstrap.min.css') !!}
 	{!! Html::style('css/estilos.css') !!}
 	{!! Html::style('plugins/sweet_alert/dist/sweetalert.css') !!}
+	{!! Html::style('plugins/estilos/chosen.min.css') !!}
+	{!! Html::style('plugins/trumbowyg/ui/trumbowyg.min.css') !!}
 </head>
 <body>
- 
-@include('layouts.partials._nav')
-    <!-- Scripts -->
+	 <section>
+	 	@include('layouts.partials._nav')
+	 </section>	
 
 	<section>
 		<div class="container">
@@ -32,6 +34,9 @@
 	<script src="{{ asset('plugins/bootstrap/js/bootstrap.js') }}"></script>
 	<script src="{{ asset('plugins/sweet_alert/dist/sweetalert.min.js') }}"></script>
 	<script src="{{ asset('plugins/js/scripts.js') }}"></script>
+	<script src="{{ asset('plugins/js/chosen.jquery.min.js') }}"></script>
+	<script src="{{ asset('plugins/trumbowyg/trumbowyg.min.js') }}"></script>
+	@yield('script')
 
 </body>
 </html>

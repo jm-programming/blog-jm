@@ -24,27 +24,18 @@
 
 		<div class="form-group">
             {!! Form::label('category_id', 'Categoria') !!}
-            <select  name="category_id" class="form-control">
-	            <option disabled selected value> -- Seleccione una opción -- </option>
-	            	@foreach($categories as $categor)
-	            	<option value="{{$categor->id}}"> {{ $categor->name }}</option>  
-	              	@endforeach
-            </select>
+           
+            {!! Form::select('category_id', $categories, null, ['class'=>'form-control category_chosen' , 'placeholder'=>'Seleccione una categoria']) !!}
         </div>
 
 		<div class="form-group">
 			{!! Form::label('content', 'Contenido') !!}
-			{!! Form::textarea('content', null, ['class'=>'form-control']) !!}
+			{!! Form::textarea('content', null, ['class'=>'form-control content_trumbowyg']) !!}
 		</div>
 
 		<div class="form-group">
             {!! Form::label('tags', 'Tag') !!}
-            <select  name="tags[]" class="form-control" multiple="">
-	            
-	            	@foreach($tags as $tag)
-	            	<option value="{{ $tag->id }}"> {{ $tag->name }}</option>  
-	              	@endforeach
-            </select>
+            {!! Form::select('tags', $tags, null, ['class'=>'form-control chosen_tag' , 'multiple']) !!}
         </div>
 		
 		<div class="form-group">
@@ -64,4 +55,23 @@
     
 </div>
 </div>
+@endsection
+
+@section('script')
+
+<script>
+	$(".chosen_tag").chosen({
+		placeholder_text_multiple: 'Seleccione un maximo de 3 tags',
+		max_selected_options: 3,
+		no_results_text: 'No se encontro tags',
+
+	});
+
+	$('.category_chosen').chosen({
+		no_results_text: 'No se encontro categoria',
+	});
+
+	$('.content_trumbowyg').trumbowyg();
+</script>
+
 @endsection

@@ -24,27 +24,17 @@
 
 		<div class="form-group">
             {!! Form::label('category_id', 'Categoria') !!}
-            <select  name="category_id" class="form-control">
-	            <option disabled selected value> -- Seleccione una opción -- </option>
-	            	@foreach($categories as $categor)
-	            	<option value="{{$categor->id}}"> {{ $categor->name }}</option>  
-	              	@endforeach
-            </select>
+            {!! Form::select('category_id', $categories, $categories ,['class' => 'form-control category_chosen' , 'placeholder' => 'Seleccione una categoria'] ) !!}
         </div>
 
 		<div class="form-group">
 			{!! Form::label('content', 'Contenido') !!}
-			{!! Form::textarea('content', $articles->content, ['class'=>'form-control']) !!}
+			{!! Form::textarea('content', $articles->content, ['class'=>'form-control content_trumbowyg']) !!}
 		</div>
 
 		<div class="form-group">
             {!! Form::label('tags', 'Tag') !!}
-            <select  name="tags[]" class="form-control" multiple="">
-	            
-	            	@foreach($tags as $tag)
-	            	<option value="{{ $tag->id }}"> {{ $tag->name }}</option>  
-	              	@endforeach
-            </select>
+            {!! Form::select('tags[]', $tags, $my_tags, ['class'=>'form-control chosen-tag', 'multiple']) !!}
         </div>
 		
 		<div class="form-group">
@@ -54,6 +44,7 @@
         <div class="form-group">
         	<button class="btn btn-primary">Editar articulo</button>
         </div>
+         
 
 	{!! Form::close() !!}
    <hr>
@@ -64,4 +55,26 @@
     
 </div>
 </div>
+@endsection
+
+@section('script')
+
+<script>
+	$(".chosen-tag").chosen({
+		placeholder_text_multiple: 'Seleccione un maximo de 3 tags',
+		max_selected_options: 3,
+		no_results_text: 'No se encontro tags',
+
+	});
+
+	$('.category_chosen').chosen({
+		no_results_text: 'No se encontro tags',
+		placeholder_text_multiple: 'Seleccione una categoria'
+	});
+
+	$('.content_trumbowyg').trumbowyg({
+		
+	});
+</script>
+
 @endsection
