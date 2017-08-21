@@ -16,27 +16,36 @@
 	{!! Html::style('plugins/sweet_alert/dist/sweetalert.css') !!}
 	{!! Html::style('plugins/estilos/chosen.min.css') !!}
 	{!! Html::style('plugins/trumbowyg/ui/trumbowyg.min.css') !!}
+	{!! Html::style('plugins/Full_Calendar/styles/fullcalendar.css') !!}
+	{!! Html::style('plugins/Full_Calendar/styles/fullcalendar.print.min.css', ['media'=>'print']) !!}
+	<script src="{{ asset('plugins/js/jquery.min.js') }}"></script>
+	<script src="{{ asset('plugins/Full_Calendar/js/moment.min.js') }}"></script>
+	<script src="{{ asset('plugins/Full_Calendar/js/fullcalendar.min.js') }}"></script>
+	@yield('styles')
 </head>
 <body>
+
 	 <section>
 	 	@include('layouts.partials._nav')
 	 </section>	
 
 	<section>
-		<div class="container">
+		<div class="container-fluid">
 			@yield('content')
 		</div>
 	</section>
+	
 
 
 	
-	<script src="{{ asset('plugins/js/jquery.min.js') }}"></script>
+	
 	<script src="{{ asset('plugins/bootstrap/js/bootstrap.js') }}"></script>
 	<script src="{{ asset('plugins/sweet_alert/dist/sweetalert.min.js') }}"></script>
 	<script src="{{ asset('plugins/js/scripts.js') }}"></script>
 	<script src="{{ asset('plugins/js/chosen.jquery.min.js') }}"></script>
 	<script src="{{ asset('plugins/trumbowyg/trumbowyg.min.js') }}"></script>
+	
 	@yield('script')
-
+	
 </body>
 </html>

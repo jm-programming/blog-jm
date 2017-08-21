@@ -8,7 +8,7 @@ use App\Tag;
 use App\Image;
 use Session;
 use Redirect;
-use DB;
+use Validator;
 
 
 class ArticlesController extends Controller
@@ -52,11 +52,24 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:articles|min:5|max:100',
+            'content' => 'required|min:8|max:245',
+            'category_id' => 'required',
+            'image' => 'required|image'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('articles/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         if ($request->file('image')) {
             $file = $request->file('image');
             $name = 'blogfacilito_' . time() . '.' . $file->getClientOriginalExtension();
-            $path = public_path() . "\images\articles";
+            $path = public_path() . "\imagenes\articles\\";
+            
             $file->move($path,$name);
         }
 
@@ -118,10 +131,23 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:articles|min:5|max:100',
+            'content' => 'required|min:8|max:245',
+            'category_id' => 'required',
+            'image' => 'required|image'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('articles.edit', $id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         
         $articles = Article::find($id);
         $articles->fill($request->all());
         $articles->save();
+        $articles->tags()->sync($request->tags);
         Session::flash('message', 'Article ' . $articles->title . ' editado con exito...');
         return redirect()->route('articles.index');
 

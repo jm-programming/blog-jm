@@ -40,7 +40,7 @@
 		
 		<div class="form-group">
 			{!! Form::label('image','Imagen') !!}
-			{!! Form::file('image', null, ['class'=>'form-control']) !!}
+			{!! Form::file('image', null, "{{ old() }}", ['class'=>'form-control']) !!}
 		</div>
         <div class="form-group">
         	<button class="btn btn-primary">Crear articulo</button>

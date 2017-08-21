@@ -31,7 +31,11 @@ Route::group(['middleware' => 'auth'], function() {
 	#----------------------------------------------------------#
 
 	#---------------------Rutas de las Imagenes------------------#
-	Route::resource('images', 'ImageController');
+	#Route::resource('images', 'ImageController');
+	Route::get('images', [
+    	'as' => 'admin.images.index', 
+    	'uses' => 'ImageController@index'
+	]);
 
 	#-----------------------------------------------------------------#
 
@@ -62,6 +66,11 @@ Route::group(['middleware' => 'auth'], function() {
 
 	#--------------------------------------------------------------------#
 
+
+	#-----------------Rutas del calendario-----------------------------------#
+	Route::resource('calendars', 'CalendarController');
+
+	
 });
 
 
