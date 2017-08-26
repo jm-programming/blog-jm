@@ -37,10 +37,6 @@
             {!! Form::select('tags[]', $tags, $my_tags, ['class'=>'form-control chosen-tag', 'multiple']) !!}
         </div>
 		
-		<div class="form-group">
-			{!! Form::label('image','Imagen') !!}
-			{!! Form::file('image', null, ['class'=>'form-control']) !!}
-		</div>
         <div class="form-group">
         	<button class="btn btn-primary">Editar articulo</button>
         </div>

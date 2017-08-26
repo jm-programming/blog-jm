@@ -9,7 +9,7 @@ use App\Image;
 use Session;
 use Redirect;
 use Validator;
-
+use Auth;
 
 class ArticlesController extends Controller
 {
@@ -20,13 +20,13 @@ class ArticlesController extends Controller
      */
     public function index(Request $request)
     {
-        $articles = Article::search($request->title)->orderBy('id', 'DESC')->paginate(5);
+        $articles = Article::search($request->title)->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate(5);
         $articles->each(function($articles){
             $articles->category;
             $articles->user;
         });
 
-        dd($articles);
+
 
         return view('admin.articles.index')->with('articles',$articles);
     }
@@ -110,18 +110,27 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        
-        
-        $articles = Article::find($id);
-        $articles->category;
-        $categories = Category::orderBy('name', 'ASC')->pluck('name','id');
-        $tags = Tag::orderBy('name' , 'ASC')->pluck('name','id');
-        $my_tags = $articles->tags->pluck('id')->toArray();
                 
-        return view('admin.articles.edit')->with('articles', $articles)
-                                          ->with('categories', $categories)
-                                          ->with('tags', $tags)
-                                          ->with('my_tags', $my_tags);
+        $articles = Article::find($id);
+        if(Auth::user()->id == $articles->user_id){
+            $articles->category;
+            //$imagen = $articles->images[0]->id;
+            //dd($imagen);
+            $categories = Category::orderBy('name', 'ASC')->pluck('name','id');
+            $tags = Tag::orderBy('name' , 'ASC')->pluck('name','id');
+            $my_tags = $articles->tags->pluck('id')->toArray();
+                    
+            return view('admin.articles.edit')->with('articles', $articles)
+                                              ->with('categories', $categories)
+                                              ->with('tags', $tags)
+                                              ->with('my_tags', $my_tags);
+
+        }
+        else{
+            return redirect()->route('articles.index');
+        }
+
+        
     }
 
     /**
@@ -134,10 +143,9 @@ class ArticlesController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:articles|min:5|max:100',
+            'title' => 'required|min:5|max:100',
             'content' => 'required|min:8|max:245',
             'category_id' => 'required',
-            'image' => 'required|image'
         ]);
 
         if ($validator->fails()) {
@@ -149,7 +157,7 @@ class ArticlesController extends Controller
         $articles = Article::find($id);
         $articles->fill($request->all());
         $articles->save();
-        $articles->tags()->sync($request->tags);
+        $articles->tags()->sync($request->tags); //llenando la tabla pivot
         Session::flash('message', 'Article ' . $articles->title . ' editado con exito...');
         return redirect()->route('articles.index');
 
