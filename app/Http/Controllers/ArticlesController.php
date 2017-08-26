@@ -26,6 +26,8 @@ class ArticlesController extends Controller
             $articles->user;
         });
 
+        dd($articles);
+
         return view('admin.articles.index')->with('articles',$articles);
     }
 

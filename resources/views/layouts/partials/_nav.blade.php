@@ -22,7 +22,7 @@
                     
                     <ul class="nav navbar-nav">
     
-              			 @if (!Auth::guest())
+              			 @if (!Auth::guest() && Auth::user()->typeUser())
                            	 <li>{!! link_to('/users', $title = ' Usuarios', $attributes = ['class'=>'glyphicon glyphicon-user']) !!}</li>
         					<li>{!! link_to('/categories', $title = ' Categorias', $attributes = ['class'=>'glyphicon glyphicon-list-alt']) !!}</li>
                             <li>{!! link_to('/articles', $title = ' Articulos', $attributes = ['class'=>'glyphicon glyphicon-th-large']) !!}</li>       
@@ -47,7 +47,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                   <li><a href="#"> <span class="glyphicon glyphicon-edit"></span> Editar Cuenta</a></li>
+                                   <li><a href="/useredit"> <span class="glyphicon glyphicon-edit"></span> Editar Cuenta</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

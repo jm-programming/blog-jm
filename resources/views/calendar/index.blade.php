@@ -41,7 +41,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			defaultDate: '2017-05-12',
+			defaultDate: '2017-10-30',
 			navLinks: true, // can click day/week names to navigate views
 			selectable: true,
 			selectHelper: true,

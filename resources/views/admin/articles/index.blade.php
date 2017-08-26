@@ -15,33 +15,33 @@
   <div class="panel-heading">
     <h3 class="panel-title"><h3 class="text-center">Articulos</h3></h3>
   </div>
-
- 
-
   <div class="panel-body">
   
     <table class="table table-responsive">
-		<div class="col-md-12">
-				<div class="col-md-4">
-					<h2> <span class="glyphicon glyphicon-th-large"></span> Listado de Articulos</h2>
-				</div>
-
-			<div class="col-md-4">	
+				
 			 {!! Form::open( ['route'=>'articles.index', 'method'=> 'GET', 'class'=>'navbar-form pull-right']) !!}
-
-						<div class="input-group">
+			 <div class="col-md-12">
+		<div class="col-md-4 text-left">
+			<h2> <span class="glyphicon glyphicon-th-large"></span> Listado de Articulos</h2>
+		</div>	
+						<div class="input-group text-center col-md-4">
 					 		 {!! Form::text('title', null, ['class'=>'form-control', 'placeholder'=>'Buscar Articulo']) !!}
 					 		 <span class="input-group-addon"> <span class="glyphicon glyphicon-search"></span></span>
 						</div>
-							
-			{!! Form::close() !!}
-			</div>
-			<div class="col-md-4">
+			<div class="col-md-12">
 				<div class="text-right">
 					{{ link_to_route('articles.create', $title = '',null, $attributes = ['class'=>'btn btn-info glyphicon glyphicon-plus']) }}<hr>
 				</div>
 			</div>
-		</div>	
+			</div>
+			{!! Form::close() !!}
+			
+			
+
+
+
+
+
 		<div class="col-md-12">
 			@include('alerts._success')
 		</div>

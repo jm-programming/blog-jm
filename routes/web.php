@@ -17,9 +17,20 @@ Route::group(['middleware' => 'auth'], function() {
 
 	#-----------------Rutas del Home----------------------#
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('useredit', [
+    	'as' => 'user.edit',
+    	'uses' => 'HomeController@edit'
+    ]);
 
+    Route::put('usersupdate/{id}', 'HomeController@update');
+    Route::put('users/{id}/update', [
+    	'as' => 'user.update',
+	    'uses' => 'HomeController@update'
+	]);
     #-------------------------------------------------------#
-
+    Route::group(['middleware' => 'admin'], function() {
+        //
+    
     #---------------Rutas de Usuarios ---------------------#
     Route::resource('users', 'UserController');
     
@@ -70,7 +81,7 @@ Route::group(['middleware' => 'auth'], function() {
 	#-----------------Rutas del calendario-----------------------------------#
 	Route::resource('calendars', 'CalendarController');
 
-	
+	});	
 });
 
 

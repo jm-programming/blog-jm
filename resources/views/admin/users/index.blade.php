@@ -51,7 +51,7 @@
 				@endif
 				<td>	
 			<a href="{{ route('users.edit', $user->id) }}" type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>	
-			<a href="{{ route('admin.users.destroy', $user->id) }}"  class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+			<a class="btn btn-danger eliminar" href="{{ route('admin.users.destroy', $user->id) }}"><span class="glyphicon glyphicon-remove"></span></a>
 								
 			</td>
 			</tr>
@@ -70,3 +70,4 @@
 	</div>
 @endsection
 
+@section('styles')
