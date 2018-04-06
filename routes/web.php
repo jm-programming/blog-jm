@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 
     Route::put('usersupdate/{id}', 'HomeController@update');
+    
     Route::put('users/{id}/update', [
     	'as' => 'user.update',
 	    'uses' => 'HomeController@update'

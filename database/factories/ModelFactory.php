@@ -21,7 +21,9 @@ $factory->define(User::class, function (Generator $faker) {
 
     return [
         'name' 		=> $faker->name,
-        'email' 	=> $faker->Email,
+        //'email' 	=> $faker->Email,
+        'email' 	=> str_random(10).'@gmail.com',
+
         'password' 	=> bcrypt('123456'),
         
     ];

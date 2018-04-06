@@ -126,7 +126,7 @@ class ArticlesController extends Controller
                                               ->with('my_tags', $my_tags);
 
         }
-        else{
+        else {
             return redirect()->route('articles.index');
         }
 

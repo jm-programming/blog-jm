@@ -13,7 +13,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <span class="glyphicon glyphicon-flash "></span> Codigo Facilito
+                        <span class="glyphicon glyphicon-flash "></span> Blog de Imagenes
                     </a>
 
                 </div>
